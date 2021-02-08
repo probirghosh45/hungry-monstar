@@ -1,24 +1,27 @@
+//event handler for search
+
 const searchBtn = document.getElementById('searchButton');
 searchBtn.addEventListener('click', function () {
     const mealItemsName = document.getElementById('mealInput').value;
     mealDetailsInfo(mealItemsName);
-})
+});
 
 
-const mealDetailsInfo = MealName => {
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${MealName}`
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.meals != null){
-                displayMealInfo(data.meals);
-            }else{
-                alert('No data');
-            }
-        })
-        .catch(error => alert('Check Data Connection'))
+//API Call by fetch for meal Name
+
+const mealDetailsInfo = (MealName) => {
+   fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${MealName}`)
+    .then(response => response.json())
+    .then(data => displayMealInfo(data.meals))
+    .catch(error =>{
+        message.innerText = "Please Write Somethings to Search";
+    });
+    document.getElementById('mealInput').value = "";
+    message.innerText = "";
+
 }
+
+
 
 const displayMealInfo = mealItemsDetailsInformations => {
     const mealContainer = document.getElementById('mealCard');
@@ -42,20 +45,17 @@ const displayMealInfo = mealItemsDetailsInformations => {
 
 }
 
-const mealIngredientsInfo = id => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.meals != null){
-                displayDetails(data.meals);
-            }else{
-                alert('No data');
-            }
-        })
-        .catch(error => alert('Check Data Connection'))
+
+//API Call by fetch for meal ingredients 
+
+const mealIngredientsInfo = mealItemName => { 
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealItemName}`;
+fetch(url)
+        .then(response => response.json())
+        .then(data => displayDetails(data.meals))
 }
+
+//meal ingredients details information
 
 const displayDetails = mealItemDetails => {
     const mealItemsInformation = document.getElementById('mealItemsInfo');
@@ -97,7 +97,7 @@ const displayDetails = mealItemDetails => {
 
 }
 
-const dataErase = id => {
-    const mealItemsInformation = document.getElementById(id);
+const dataErase = mealItemName => {
+    const mealItemsInformation = document.getElementById(mealItemName);
     mealItemsInformation.innerHTML = "";
 }
