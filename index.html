@@ -45,12 +45,12 @@
             <div class="input-group mb-3">
                 <input id="mealInput"  type="text" class="form-control" placeholder="Search for Meal...">
                 <div class="input-group-append">
-                    <button id="searchButton"  type="button" class="btn btn-outline-primary search-button">Search</button>
+                    <button id="searchButton" onclick="searchFood()"  type="button" class="btn btn-outline-primary search-button">Search</button>
                 </div>
             </div>
           </form>
         
-          <h1 id="message"></h1>
+          <h2 id="errorMessage"></h2>
           <div id="mealItemsInfo" class="py-3"></div>
 
           <div id="mealCard"></div>

@@ -1,23 +1,31 @@
-//event handler for search
+const errorDiv = document.getElementById('errorMessage');
 
-const searchBtn = document.getElementById('searchButton');
-searchBtn.addEventListener('click', function () {
-    const mealItemsName = document.getElementById('mealInput').value;
-    mealDetailsInfo(mealItemsName);
-});
-
-
-//API Call by fetch for meal Name
-
-const mealDetailsInfo = (MealName) => {
-   fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${MealName}`)
-    .then(response => response.json())
-    .then(data => displayMealInfo(data.meals))
+//------------- handle search button-----------
+const searchFood = () => {
+    const searchField = document.getElementById('mealInput');
+    const searchText = searchField.value;
+    //------ clear data---------
+    searchField.value = '';
+    //-------- error handle---------
+    if(searchText === ''){
+        errorMessage.innerText = "তুমি কিছু লিখো নাই 🙄";
+        const totalFound = document.getElementById('total-books');
+        totalFound.textContent = '';
+        const displaySearch = document.getElementById('search-result')
+        displaySearch.textContent = '';
+        return;
+    }
+        
+    // ----------load data----------
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchText}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayMealInfo(data))
     .catch(error =>{
-        message.innerText = "Please Write Somethings to Search";
-    });
-    document.getElementById('mealInput').value = "";
-    message.innerText = "";
+        errorMessage.innerText = "আজাইরা খোঁজা-খুঁজি বাদ দিয়া ঘুমাও 😐";
+            });
+            document.getElementById('mealInput').value = "";
+            errorMessage.innerText = "";
 
 }
 
