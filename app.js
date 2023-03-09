@@ -1,4 +1,3 @@
-const errorDiv = document.getElementById('errorMessage');
 
 //------------- handle search button-----------
 const searchFood = () => {
