@@ -15,7 +15,7 @@ const searchFood = () => {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
     fetch(url)
     .then(res => res.json())
-    .then(data => displayMealInfo(data))
+    .then(data => displayMealInfo(data.meals))
     .catch(error =>{
         errorMessage.innerText = "আজাইরা খোঁজা-খুঁজি বাদ দিয়া ঘুমাও 😐";
             });
@@ -26,11 +26,12 @@ const searchFood = () => {
 
 
 
-const displayMealInfo = mealItemsDetailsInformations => {
+const displayMealInfo = mealData => {
+    // console.log("mealData",mealData);
     const mealContainer = document.getElementById('mealCard');
     dataErase('mealCard');
     dataErase('mealItemsInfo');
-    mealItemsDetailsInformations.forEach(item => {
+    mealData.forEach(item => {
         const foodItemName = document.createElement('div');
         foodItemName.className = 'meal-items';
         itemPosition = item.idMeal;
