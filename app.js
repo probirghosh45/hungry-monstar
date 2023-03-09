@@ -8,10 +8,6 @@ const searchFood = () => {
     //-------- error handle---------
     if(searchText === ''){
         errorMessage.innerText = "তুমি কিছু লিখো নাই 🙄";
-        const totalFound = document.getElementById('total-books');
-        totalFound.textContent = '';
-        const displaySearch = document.getElementById('search-result')
-        displaySearch.textContent = '';
         return;
     }
         
